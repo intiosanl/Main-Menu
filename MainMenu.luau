@@ -8,7 +8,7 @@ local Workspace = game:GetService("Workspace")
 local Lighting = game:GetService("Lighting")
 local Players = game:GetService("Players")
 
--- Every tunable
+-- Tunables
 local CONFIG = {
 	TITLE_TEXT = "MENU\nSHOWCASE",
 	TITLE_PART_SIZE = Vector3.new(10, 4, 0.01),
@@ -29,7 +29,7 @@ local CONFIG = {
 	UI_SCALE = { MIN = 0.90, MAX = 1.25 },
 	HOVER_BUTTON_SCALE = 1.2,
 
-	-- Higher = snappier (Multiplied by deltaTime so the feel is fps independent)
+	-- Higher = snappier
 	LOOK_SMOOTHING = 5,
 	UI_SCALE_SMOOTHING = 4,
 	MOUSE_LOOK_STRENGTH = Vector2.new(1.0, 0.7),
@@ -308,7 +308,7 @@ local function setupMenu()
 	-- The default Animate script keeps starting its own idle on top of ours (we don't want that, so we disable it)
 	local animateScript = character:FindFirstChild("Animate")
 	if animateScript then
-		animateScript.Disabled = true
+		animateScript.Enabled = false
 	end
 
 	local idleAnimation = animations[rng:NextInteger(1, #animations)]
@@ -404,7 +404,6 @@ local dofEffect = Lighting:FindFirstChild("MenuAutofocus")
 local currentX, currentY = 0, 0
 local currentButtonScale = 1.1
 
--- Makes it so the 
 local function worldToGui(position)
 	if menuGui.IgnoreGuiInset then
 		return camera:WorldToViewportPoint(position) -- ignores the top inset
